@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Table</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      border: 1px solid black;
+    }
+
+    th:first-child {
+            background-color: lightgreen;
+        }
+        th:last-child {
+            background-color: lightpink;
+        }
+
+    @media (max-width: 500px) {
+      th {
+        display: block;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <table class="responsive-table"> <tr>
+      <th>First cell</th>
+      <th>Second cell</th>
+    </tr>
+  </table>
+</body>
+</html>
