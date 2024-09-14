@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>It’s over 9000</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      input,
+      select {
+        margin: 10px;
+        padding: 10px;
+      }
+      button[type="submit"] {
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="calculatorForm">
+      <input type="text" id="num1" placeholder="First" />
+      <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+      </select>
+      <input type="text" id="num2" placeholder="Second" />
+      <button type="submit">Try me!</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $("#calculatorForm").on("submit", function (event) {
+        event.preventDefault();
+
+        const num1Str = $("#num1").val();
+        const num2Str = $("#num2").val();
+
+        // Check if the input is a valid number (only digits)
+        // Regular Expression (Regex) สำหรับการตรวจสอบ string ว่ามีแต่ตัวเลขหรือไม่
+        //^: หมายถึงการเริ่มต้นของ string
+        //\d: แทนตัวเลข (digit) ตั้งแต่ 0 ถึง 9
+        //+: หมายถึง มีตัวเลขหนึ่งตัวหรือมากกว่า
+        //$: หมายถึงจุดสิ้นสุดของ string
+        //.test(numStr): เป็นเมธอดของ Regular Expression ที่ใช้ตรวจสอบ string
+        const isValidNumber = (numStr) => /^\d+$/.test(numStr);
+
+        if (!isValidNumber(num1Str) || !isValidNumber(num2Str)) {
+          alert("Error :(");
+          console.log("Error :(");
+          return;
+        }
+
+        const num1 = parseInt(num1Str);
+        const num2 = parseInt(num2Str);
+        const operator = $("#operator").val();
+
+        let result;
+
+        switch (operator) {
+          case "+":
+            result = num1 + num2;
+            break;
+          case "-":
+            result = num1 - num2;
+            break;
+          case "*":
+            result = num1 * num2;
+            break;
+          case "/":
+            if (num2 === 0) {
+              alert("It’s over 9000!");
+              console.log("It’s over 9000!");
+              return;
+            }
+            result = num1 / num2;
+            break;
+          case "%":
+            if (num2 === 0) {
+              alert("It’s over 9000!");
+              console.log("It’s over 9000!");
+              return;
+            }
+            result = num1 % num2;
+            break;
+          default:
+            alert("Error :(");
+            return;
+        }
+
+        alert(`Result: ${result}`);
+        console.log(result);
+      });
+
+      // Use jQuery to display the alert every 30 seconds
+      setInterval(() => {
+        alert("Please, use me...");
+      }, 30000);
+    </script>
+  </body>
+</html>
